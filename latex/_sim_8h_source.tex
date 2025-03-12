@@ -1,0 +1,60 @@
+\doxysection{Sim.\+h}
+\hypertarget{_sim_8h_source}{}\label{_sim_8h_source}\index{/Users/nicholaspatapoff/Documents/GitHub/pdb\_parser/Sim.h@{/Users/nicholaspatapoff/Documents/GitHub/pdb\_parser/Sim.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ Sim\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ Sim\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Env.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}parm.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }simulation\{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \textcolor{keyword}{using\ }T\ =\ std::variant<int,\ float,\ std::string>;}
+\DoxyCodeLine{00014\ std::unique\_ptr<Environment>\ coord;}
+\DoxyCodeLine{00015\ std::unique\_ptr<parm>\ top;}
+\DoxyCodeLine{00016\ std::fstream\ temp\_file;}
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ displacement\_vect(std::vector<float>\&\ d,\ \textcolor{keywordtype}{int}\ atom1,\ \textcolor{keywordtype}{int}\ atom2);}
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ magnitude(std::vector<float>\&\ \textcolor{keywordtype}{object},\ \textcolor{keywordtype}{float}\&\ mag);}
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ unit\_vector(\textcolor{keywordtype}{float}\&\ mag,\ std::vector<float>\ d,\ std::vector<float>\&\ unitv);}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ theta\_from\_dot(\textcolor{keywordtype}{int}\&\ atom1,\ \textcolor{keywordtype}{int}\&\ atom2,\ \textcolor{keywordtype}{int}\&\ atom3,\ \textcolor{keywordtype}{float}\&\ theta);}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{void}\ dot(std::vector<float>\&\ disp1,\ std::vector<float>\&\ disp2,\ \textcolor{keywordtype}{float}\&\ val);}
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ cross(std::vector<float>\&\ vect1,\ std::vector<float>\&\ vect2,\ std::vector<float>\&\ cprod);}
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ DHtheta\_from\_dot(std::vector<float>\&\ nplane1,\ std::vector<float>\&\ nplane2,\ \textcolor{keywordtype}{float}\ np1mag,\ \textcolor{keywordtype}{float}\ np2mag,\ \textcolor{keywordtype}{float}\&\ theta);}
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ DHrotTheta\_from\_dot(std::vector<float>\&\ disp1,\ std::vector<float>\&\ disp2,\ \textcolor{keywordtype}{float}\&\ mag\_disp1,\ \textcolor{keywordtype}{float}\&\ mag\_disp2,\ \textcolor{keywordtype}{float}\&\ theta);}
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ resize(std::vector<float>\&\ vect,\ \textcolor{keywordtype}{float}\ scale);}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ vect\_add(std::vector<float>\&\ v1,\ std::vector<float>\&\ v2,\ std::vector<float>\&\ product);}
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ DH\_LJF(\textcolor{keywordtype}{int}\ atom1,\ \textcolor{keywordtype}{int}\ atom4,\ \textcolor{keywordtype}{float}\ SCNBF,\ \textcolor{keywordtype}{float}\ LJA,\ \textcolor{keywordtype}{float}\ LJB);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ std::vector<float>\ velocities;}
+\DoxyCodeLine{00032\ std::vector<float>\ forces;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ simulation(\mbox{\hyperlink{class_environment}{Environment}}\&\ coord,\ \mbox{\hyperlink{classparm}{parm}}\&\ top,\ \textcolor{keywordtype}{float}\ step,\ std::string\ export\_name);}
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ update\_coord(\textcolor{keywordtype}{float}\ step\_size,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ export\_step);}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ exports();}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ spring\_force(\textcolor{keywordtype}{int}\ atom1,\ \textcolor{keywordtype}{int}\ atom2,\ \textcolor{keywordtype}{float}\ kval,\ \textcolor{keywordtype}{float}\ eq);}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ force\_additions(std::vector<T>\&\ BWoutH,\ std::vector<T>\&\ BIH,\ std::vector<T>\&\ BForceC,\ std::vector<T>\&\ BEQV,\ std::vector<T>\&\ AWoutH,}
+\DoxyCodeLine{00041\ \ std::vector<T>\&\ AIH,std::vector<T>\&\ AForceC,\ std::vector<T>\&\ AEQV,\ std::vector<T>\&\ DincH,\ std::vector<T>\&\ DWoutH,\ std::vector<T>\&\ DForceC,\ }
+\DoxyCodeLine{00042\ \ std::vector<T>\&\ DPeriod\ ,\ std::vector<T>\&\ DPhase,\ std::vector<T>\&\ SCEE\_SF,\ std::vector<T>\&\ SCNB\_SF,\ std::vector<T>\&\ LJAC,\ std::vector<T>\&\ LJBC,std::vector<T>\&\ ATI,}
+\DoxyCodeLine{00043\ \ \ std::vector<T>\&\ NBPIndex);}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ VerletAlg(\textcolor{keywordtype}{float}\&\ step,\ std::vector<T>\&\ BWoutH,\ std::vector<T>\&\ BIH,\ std::vector<T>\&\ BForceC,\ std::vector<T>\&\ BEQV,\ std::vector<T>\&\ AWoutH,}
+\DoxyCodeLine{00045\ \ std::vector<T>\&\ AIH,std::vector<T>\&\ AForceC,\ std::vector<T>\&\ AEQV,\ std::vector<T>\&\ DincH,\ std::vector<T>\&\ DWoutH,\ std::vector<T>\&\ DForceC,\ }
+\DoxyCodeLine{00046\ \ std::vector<T>\&\ DPeriod\ ,\ std::vector<T>\&\ DPhase,\ std::vector<T>\&\ SCEE\_SF,\ std::vector<T>\&\ SCNB\_SF,\ std::vector<T>\&\ LJAC,\ std::vector<T>\&\ LJBC,std::vector<T>\&\ ATI,}
+\DoxyCodeLine{00047\ \ \ std::vector<T>\&\ NBPIndex);\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ angle\_force(\textcolor{keywordtype}{int}\ atom1,\ \textcolor{keywordtype}{int}\ atom2,\ \textcolor{keywordtype}{int}\ atom3,\ \textcolor{keywordtype}{float}\ k,\ \textcolor{keywordtype}{float}\ eq);}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ dihedral\_force(\textcolor{keywordtype}{int}\ atom1,\ \textcolor{keywordtype}{int}\ atom2,\ \textcolor{keywordtype}{int}\ atom3,\ \textcolor{keywordtype}{int}\ atom4,\ \textcolor{keywordtype}{float}\ k,\ \textcolor{keywordtype}{float}\ period,\ \textcolor{keywordtype}{float}\ sceef,\ \textcolor{keywordtype}{float}\ scnbf,\ \textcolor{keywordtype}{float}\ phase);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,54 @@
+\doxysection{Datacontainer.\+h}
+\hypertarget{_datacontainer_8h_source}{}\label{_datacontainer_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <any>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_data__and__type}{Data\_and\_type}}\ }
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{comment}{//\ saves\ value\ as\ any\ and\ saves\ the\ value\ type\_info\ to\ be\ compared\ to\ later\ on}}
+\DoxyCodeLine{00010\ \ \ \ \ std::any\ value;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ std::type\_info\ *value\_type;}
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }temp\_data}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ temp\_data()\ \{\}\ \textcolor{comment}{//\ general\ constructor}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classtemp__data_ab50c3bf19cf7cd2177115d712e7a09cd}{add\_data}}(\textcolor{keyword}{const}\ std::string\ ID,\ T\ \&value)}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.contains(ID))}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}ID:\ "{}}\ <<\ ID\ <<\ \textcolor{stringliteral}{"{}\ -\/\ is\ already\ defined"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_data__and__type}{Data\_and\_type}}\ temp\{std::any(value),\ \&\textcolor{keyword}{typeid}(T)\};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ data[ID]\ =\ temp;}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ T\ *retrieve\_data(std::string\ ID)}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.contains(ID))}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_data__and__type}{Data\_and\_type}}\ \&stored\ =\ data[ID];}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*stored.value\_type\ ==\ \textcolor{keyword}{typeid}(T))}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::any\_cast<T>(\&stored.value);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \ \ std::unordered\_map<std::string,\ Data\_and\_type>\ data;}
+\DoxyCodeLine{00051\ \};}
+
+\end{DoxyCode}
